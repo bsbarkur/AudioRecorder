@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.audiorecord";
+option java_outer_classname = "AudioRecordProto";
+option objc_class_prefix = "HLW";
+
+package audiorecord;
+
+service AudioTranscribe {
+    rpc SpeechToText (stream AudioBlob) returns (stream TranscribedText) {}
+}
+
+message AudioBlob {
+  bytes chunk = 1;
+}
+
+message TranscribedText {
+  bool final = 1;
+  string text = 2;
+}
